@@ -64,15 +64,22 @@ python run_agent.py --free-models
 
 ---
 
-## النماذج المجانية على OpenRouter
+## النماذج السحابية المجانية على OpenRouter
 
-| النموذج | الحجم |
-|---------|-------|
-| `mistralai/mistral-7b-instruct:free` | 7B |
-| `meta-llama/llama-3.1-8b-instruct:free` | 8B |
-| `meta-llama/llama-3.2-3b-instruct:free` | 3B |
-| `qwen/qwen-2.5-7b-instruct:free` | 7B |
-| `google/gemma-3-1b-it:free` | 1B |
+كلها مجانية تماماً ($0) — لا بطاقة ائتمانية مطلوبة.
+
+| النموذج | الحجم | مميز لـ |
+|---------|-------|---------|
+| `deepseek/deepseek-r1-0528:free` ⭐ | 671B | تفكير عميق، برمجة (الافتراضي) |
+| `deepseek/deepseek-chat-v3-0324:free` | 671B | محادثة سريعة وذكية |
+| `meta-llama/llama-4-maverick:free` | MoE | أحدث نماذج Meta |
+| `meta-llama/llama-3.3-70b-instruct:free` | 70B | متوازن وقوي |
+| `mistralai/mistral-small-3.1-24b-instruct:free` | 24B | سريع وخفيف |
+| `google/gemma-3-27b-it:free` | 27B | Google Gemma |
+| `qwen/qwen-2.5-72b-instruct:free` | 72B | تعدد اللغات |
+| `nvidia/llama-3.1-nemotron-70b-instruct:free` | 70B | NVIDIA tuned |
+| `moonshotai/kimi-k2:free` | — | Kimi K2 |
+| `microsoft/phi-4:free` | 14B | Microsoft Phi |
 
 ---
 

@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
 Agency Agents Runner
-Runs any agent from the /agents directory using OpenRouter (free) or OpenAI.
+Runs any agent from the /agents directory using OpenRouter (free cloud) or OpenAI.
 
 Usage:
     python run_agent.py                    # interactive agent picker
     python run_agent.py --agent engineering/engineering-senior-developer
     python run_agent.py --list             # list all available agents
     python run_agent.py --provider openai  # override provider
+    python run_agent.py --free-models      # show available free cloud models
 """
 
 import os
@@ -51,13 +52,33 @@ AGENTS_DIR = Path(__file__).parent / "agents"
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 OPENAI_BASE_URL = "https://api.openai.com/v1"
 
+# Free cloud models available on OpenRouter (no cost, no credit card needed)
 FREE_MODELS = [
-    "mistralai/mistral-7b-instruct:free",
-    "meta-llama/llama-3.2-3b-instruct:free",
+    # DeepSeek — best free models for reasoning & coding
+    "deepseek/deepseek-r1-0528:free",
+    "deepseek/deepseek-chat-v3-0324:free",
+    "deepseek/deepseek-r1:free",
+    # Meta Llama
+    "meta-llama/llama-4-maverick:free",
+    "meta-llama/llama-3.3-70b-instruct:free",
     "meta-llama/llama-3.1-8b-instruct:free",
-    "google/gemma-3-1b-it:free",
+    # Mistral
+    "mistralai/mistral-small-3.1-24b-instruct:free",
+    "mistralai/mistral-7b-instruct:free",
+    # Google Gemma
+    "google/gemma-3-27b-it:free",
+    "google/gemma-3-12b-it:free",
+    # Qwen
+    "qwen/qwen-2.5-72b-instruct:free",
     "qwen/qwen-2.5-7b-instruct:free",
+    # Other notable free models
+    "nvidia/llama-3.1-nemotron-70b-instruct:free",
+    "microsoft/phi-4:free",
+    "moonshotai/kimi-k2:free",
 ]
+
+# Default free model — DeepSeek R1 is currently the strongest free model
+DEFAULT_FREE_MODEL = "deepseek/deepseek-r1-0528:free"
 
 
 def parse_frontmatter(content: str) -> tuple[dict, str]:
@@ -174,7 +195,7 @@ def build_client(provider: str) -> tuple[OpenAI, str]:
         if not api_key:
             print("ERROR: OPENROUTER_API_KEY not set. Copy .env.example to .env and fill it in.")
             sys.exit(1)
-        model = os.getenv("OPENROUTER_MODEL", FREE_MODELS[0])
+        model = os.getenv("OPENROUTER_MODEL", DEFAULT_FREE_MODEL)
         client = OpenAI(
             api_key=api_key,
             base_url=OPENROUTER_BASE_URL,
@@ -292,9 +313,11 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.free_models:
-        print("Free models on OpenRouter:")
+        print("Free cloud models on OpenRouter (no cost):")
+        print(f"  * {DEFAULT_FREE_MODEL}  ← default (strongest)")
         for m in FREE_MODELS:
-            print(f"  {m}")
+            if m != DEFAULT_FREE_MODEL:
+                print(f"    {m}")
         return
 
     agents = find_agents()
