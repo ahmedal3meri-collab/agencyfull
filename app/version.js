@@ -1,0 +1,1 @@
+self.APP_VERSION = '84954005fa';

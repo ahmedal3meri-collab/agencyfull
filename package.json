@@ -1,0 +1,13 @@
+{
+  "name": "agencyfull",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Agency — PWA لتصفح 200 وكيل ذكاء اصطناعي والتحدث معهم",
+  "scripts": {
+    "build": "node scripts/build-data.mjs",
+    "start": "node scripts/build-data.mjs && node server.mjs",
+    "icons": "node scripts/make-icons.mjs"
+  },
+  "engines": { "node": ">=18" }
+}
